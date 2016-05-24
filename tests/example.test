@@ -3,8 +3,6 @@
 
 @@ parameterized
     | deviceName | tags      | size     |
-    | mobile     | mobile    | 640x960  |
-    | tablet     | tablet    | 1024x768  |
     | desktop    | desktop   | 1280x1024 |
 
 Sample page on ${deviceName} device

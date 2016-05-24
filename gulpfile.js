@@ -1,66 +1,57 @@
 var spawn = require('child_process').spawn,
 
     async = require('async'),
-    del   = require('del'),
+    del = require('del'),
     index = require('serve-index'),
 
-    gulp  = require('gulp'),
+    gulp = require('gulp-param')(require('gulp'), process.argv),
     serve = require('gulp-serve'),
-    tap   = require('gulp-tap'),
+    tap = require('gulp-tap'),
 
     reportsDir = 'reports',
 
     suitesGlob = 'tests/*.test';
 
-gulp.task('clean', function () {
+gulp.task('clean', function() {
     return del([reportsDir]).then(paths => {
-        console.log('Deleted files and folders:\n', paths.join('\n'));
+        if (paths.length > 0) {
+            console.log('Deleted files and folders:\n', paths.join('\n'));
+        }
     });
 });
 
-gulp.task('test', ['clean'], function (done) {
-    var files = [],
-        galen = function galen (file, callback) {
-            spawn('galen', [
-                'test',
-                file.path,
-                '--htmlreport',
-                reportsDir + '/' + file.relative.replace(/\.test/, '')
-            ], {'stdio' : 'inherit'}).on('close', function (code) {
-                callback(code === 0);
-            });
-        };
+gulp.task('test', ['clean'], function(name) {
+    var testPath = 'tests/'.concat(name).concat('.test');
+    
+    if (name) {
+        var child = spawn('galen', [
+            'test',
+            testPath,
+            '--htmlreport',
+            reportsDir + '/' + name
+        ], { 'stdio': 'inherit' });
 
-    gulp.src([suitesGlob])
-        .pipe(tap(function (file) {
-            files.push(file);
-        }))
-        .on('end', function () {
-            async.rejectSeries(files, function (file, finished) {
-                galen(file, finished);
-            }, function (errors) {
-               if (errors && errors.length > 0) {
-                  done("Galen reported failed tests: " + (errors.map(function(f) {
-                     return f.relative;
-                  }).join(", ")));
-               }
-               else {
-                  done();
-               }
-            });
+        child.on('error', function(err){
+            if(err.code === 'ENOENT'){
+                console.log('Maybe Galen is not installed');
+            }
         });
+
+    } else {
+        console.log('Test name parameter is missing\nRun: gulp test --name "testName"');
+    }
 });
 
 gulp.task('serve', serve({
-    'root' : reportsDir,
-    'middleware' : function (req, res, next) {
-        index(reportsDir, { 
-            'filter'     : false,
-            'hidden'     : true,
-            'icons'      : true,
-            'stylesheet' : false,
-            'template'   : false,
-            'view'       : 'details'
+    'root': reportsDir,
+    'middleware': function(req, res, next) {
+        index(reportsDir, {
+            'filter': false,
+            'hidden': true,
+            'icons': true,
+            'stylesheet': false,
+            'template': false,
+            'view': 'details'
         })(req, res, next);
     }
 }));
