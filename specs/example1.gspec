@@ -1,0 +1,16 @@
+# Declaring objects
+
+@objects
+    header    id    header
+    content    id    content
+
+# Declaring sections
+
+= Header =
+    header:
+        height 100px
+
+= Content =
+    content:
+        css background-color is "rgba(240, 240, 208, 1)"
+                

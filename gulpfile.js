@@ -8,9 +8,7 @@ var spawn = require('child_process').spawn,
     serve = require('gulp-serve'),
     tap = require('gulp-tap'),
 
-    reportsDir = 'reports',
-
-    suitesGlob = 'tests/*.test';
+    reportsDir = 'reports';
 
 gulp.task('clean', function() {
     return del([reportsDir]).then(paths => {
@@ -21,7 +19,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('test', ['clean'], function(name) {
-    var testPath = 'tests/'.concat(name).concat('.test');
+    var testPath = 'tests/'.concat(name).concat('.test.js');
     
     if (name) {
         var child = spawn('galen', [
@@ -42,7 +40,7 @@ gulp.task('test', ['clean'], function(name) {
     }
 });
 
-gulp.task('serve', serve({
+gulp.task('reports', serve({
     'root': reportsDir,
     'middleware': function(req, res, next) {
         index(reportsDir, {
@@ -55,5 +53,3 @@ gulp.task('serve', serve({
         })(req, res, next);
     }
 }));
-
-gulp.task('default', ['test']);

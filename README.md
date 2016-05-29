@@ -18,11 +18,11 @@ npm run start
 * Run tests
 
 ```
-$ gulp test
+$ gulp test --name "testName"
 ```
 
 * View reports
 
 ```
-$ gulp serve
+$ gulp reports
 ```
