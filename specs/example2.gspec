@@ -13,4 +13,9 @@
         menu-item-${index}:
             text is "Item ${index}"
 
+    @forEach [menu_item-*] as itemName, prev as previousItem
+        ${itemName}:
+            aligned horizontally all ${previousItem}
+
+
                 
