@@ -2,7 +2,7 @@
 
 @objects
     header    id    header
-    content    id    content
+    content   id    content
 
 # Declaring sections
 
