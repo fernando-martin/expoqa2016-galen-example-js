@@ -1,0 +1,24 @@
+@rule should be squared
+     width 100% of ${objectName}/height
+
+@rule %{object} should be squared with %{size: [0-9]+} pixel size
+    ${object}:
+        width ${size} px 
+        height ${size} px
+
+# Declaring objects
+
+@objects
+    footer   id    footer
+        
+# Declaring sections
+
+= Menu =
+    footer:
+        | should be squared
+
+
+    | footer should be squared with 120 pixel size	
+    
+
+                
