@@ -1,8 +1,9 @@
 # Declaring objects
 
 @objects
-    header    id    header
-    content   id    content
+    header      id    header
+    footer      id    footer
+    side-panel  id    side-panel
 
 # Declaring sections
 
@@ -11,6 +12,11 @@
         height 100px
 
 = Content =
-    content:
-        css background-color is "rgba(240, 240, 208, 1)"
+    footer:
+        "should be grey" css background-color is "rgba(208, 208, 208, 1)"
+
+
+= Side panel =
+    side-panel:
+        width 250 to 300 px
                 
