@@ -1,16 +1,9 @@
 # Declaring objects
 
 @objects
-    header    id    header
-    content    id    content
     menu-item-*    css    #menu li a
         
-
 # Declaring sections
-
-= Header =
-    header:
-        height 100px
 
 = Menu =
     global:
@@ -20,11 +13,4 @@
         menu-item-${index}:
             text is "Item ${index}"
 
-    @forEach [menu-item-*] as itemName, next as nextItem
-        ${itemName}:
-            aligned horizontally all ${nextItem}
-
-= Content =
-    content:
-        css background-color is "rgba(240, 240, 208, 1)"
                 
