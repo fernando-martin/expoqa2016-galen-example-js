@@ -15,7 +15,6 @@
     footer:
         "should be grey" css background-color is "rgba(208, 208, 208, 1)"
 
-
 = Side panel =
     side-panel:
         width 250 to 300 px
