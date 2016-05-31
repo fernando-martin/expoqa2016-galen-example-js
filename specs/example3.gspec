@@ -1,3 +1,5 @@
+## Rules
+
 @rule should be squared
      width 100% of ${objectName}/height
 
