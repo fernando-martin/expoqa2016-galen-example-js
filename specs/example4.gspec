@@ -1,30 +1,23 @@
+## Tags
+
 # Declaring objects
 
 @objects
     header    id    header
-    content    id    content
-    menu-item-*    css    #menu li a
         
 
 # Declaring sections
 
 = Header =
-    header:
-        height 100px
+    @on mobile
+        header:
+            height 60px
 
-= Menu =
-    global:
-        count any menu-item-* is 4
-    
-    @for [1 - 4] as index
-        menu-item-${index}:
-            text is "Item ${index}"
+    @on tablet
+        header:
+            height 80px
 
-    @forEach [menu-item-*] as itemName, next as nextItem
-        ${itemName}:
-            aligned horizontally all ${nextItem}
-
-= Content =
-    content:
-        css background-color is "rgba(240, 240, 208, 1)"
+    @on dektop
+        header:
+            height 100px
                 
