@@ -6,7 +6,7 @@ The slides of the talk are available at [slideshare](http://www.slideshare.net/F
 
 ## Requirements
 * Galen 2.2.5, <a href="http://galenframework.com/download/" target="_blank">download</a>
-* NodeJS 5.8.0
+* Node 5.8.0
 
 ## Quick start
 
