@@ -1,32 +1,17 @@
 ## Galen-extras
+@import galen-extras/galen-extras-rules.gspec
 
 # Declaring objects
 
 @objects
-    header    id    header
-    content    id    content
     menu-item-*    css    #menu li a
-        
 
 # Declaring sections
 
-= Header =
-    header:
-        height 100px
-
 = Menu =
-    global:
-        count any menu-item-* is 4
-    
-    @for [1 - 4] as index
-        menu-item-${index}:
-            text is "Item ${index}"
+        | amount of any menu-item-* should be 4
+        | every menu-item-* has height ~ 50px
+        | menu-item-* are aligned horizontally next to each other with 0 to 25px margin
 
-    @forEach [menu-item-*] as itemName, next as nextItem
-        ${itemName}:
-            aligned horizontally all ${nextItem}
 
-= Content =
-    content:
-        css background-color is "rgba(240, 240, 208, 1)"
                 
